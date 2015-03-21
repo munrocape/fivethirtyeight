@@ -27,8 +27,6 @@ func NewClient() *Client {
 		"sports":      Category{Uri: "sports", Pretty: "Sports"},
 		"science":      Category{Uri: "science", Pretty: "Science"},
 		"life":        Category{Uri: "life", Pretty: "Life"},
-		"education":     Category{Uri: "education", Pretty: "Education"},
-		"entertainment": Category{Uri: "entertainment_and_arts", Pretty: "Entertainment and Arts"},
 	}
 	var c = Client{
 		Url:          "http://fivethirtyeight.com/%s/feed",
@@ -74,6 +72,14 @@ func (c *Client) GetFeed(category string) (Rss, error) {
 func (c *Client) GetPretty(category string) string {
 	if val, ok := c.Categories[category]; ok {
 		return val.Pretty
+	} else {
+		return ""
+	}
+}
+
+func (c *Client) GetUri(category string) string {
+	if val, ok := c.Categories[category]; ok {
+		return val.Uri
 	} else {
 		return ""
 	}
